@@ -1,12 +1,16 @@
 {
   "name": "electron-angular-temp",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm-run-all -p electron:serve ng:serve",
+    "ng:serve": "ng serve",
+    "electron:serve": "wait-on tcp:4200 && electron . --serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "npm run ng serve && npm run electron:serve"
   },
   "private": true,
   "dependencies": {
@@ -18,8 +22,15 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "electron": "^15.3.2",
+    "electron-reload": "^2.0.0-alpha.1",
+    "npm-run-all": "^4.1.5",
+    "osx-temperature-sensor": "^1.0.7",
+    "reload": "^3.2.0",
     "rxjs": "~7.4.0",
+    "systeminformation": "^5.9.13",
     "tslib": "^2.3.0",
+    "wait-on": "^6.0.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -28,6 +39,7 @@
     "@angular/compiler-cli": "~13.0.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "electron-rebuild": "^3.2.5",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -35,5 +47,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.4.3"
+  },
+  "resolutions": {
+    "**/node-abi": "^3.2.0"
   }
 }
