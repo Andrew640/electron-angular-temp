@@ -9,8 +9,7 @@
     "electron:serve": "wait-on tcp:4200 && electron . --serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "electron": "npm run ng serve && npm run electron:serve"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +25,6 @@
     "electron-reload": "^2.0.0-alpha.1",
     "npm-run-all": "^4.1.5",
     "osx-temperature-sensor": "^1.0.7",
-    "reload": "^3.2.0",
     "rxjs": "~7.4.0",
     "systeminformation": "^5.9.13",
     "tslib": "^2.3.0",

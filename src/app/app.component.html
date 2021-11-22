@@ -1,2 +1,32 @@
-testing {{ cpuTemp }}
-<!-- <router-outlet></router-outlet> -->
+<div class="app-component">
+    <div class="title">
+        Does the weather influence my computer’s core temperature?
+    </div>
+    <div class="temp">
+        <span>Your CPU is currently</span>
+        <span [ngClass]="">{{ cpuTemp }} &#176;C</span>
+    </div>
+    <div class="temp">
+        <span>The temperature outside is</span>
+        <span [ngClass]="">{{ weatherTemp }} &#176;C</span>
+    </div>
+    <div *ngIf="getHowHot() === 'normal'" class="description">
+        <span class="emoji">😎</span>
+        <span>Your computer temperature is normal!</span>
+    </div>
+    <div *ngIf="getHowHot() === 'warm'" class="description">
+        <span class="emoji">😅</span>
+        <span
+            >Your computer is running quite warm, looks like you're using a lot
+            of apps!</span
+        >
+    </div>
+    <div *ngIf="getHowHot() === 'hot'" class="description">
+        <span>Your computer is running hot! Close some apps!</span>
+        <span class="emoji">🥵</span>
+    </div>
+    <div *ngIf="getHowHot() === 'veryHot'" class="description">
+        <span>Your computer is running very hot! Close a lot of apps!</span>
+        <span class="emoji">🔥🔥🔥</span>
+    </div>
+</div>

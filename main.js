@@ -7,12 +7,10 @@ const si = require("systeminformation");
 let win;
 var args = process.argv.slice(1), serve = args.some(function (val) { return val === '--serve'; });
 
-const electron = require('electron')
-
 function createWindow() {
     win = new BrowserWindow({
-        width: 746,
-        height: 600,
+        width: 1000,
+        height: 800,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -21,7 +19,6 @@ function createWindow() {
     });
 
     if (serve) {
-        win.webContents.openDevTools();
         require('electron-reload')(__dirname, {
             electron: require(path.join(__dirname, './node_modules/electron'))
         });
@@ -50,10 +47,7 @@ app.on("activate", () => {
     }
 });
 
-// Quit when all windows are closed.
 app.on("window-all-closed", () => {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== "darwin") {
         app.quit();
     }
@@ -64,29 +58,10 @@ function sendTemp() {
         .then((data) => {
             if (data && data.main) {
                 win.webContents.send("getTemp", data.main);
-                console.log(data.main);
             }
         })
         .catch((error) => console.error(error));
 }
-
-// function isRoot() {
-//     return path.parse(process.cwd()).root == process.cwd();
-// }
-
-// function getDirectory() {
-//     fs.readdir(".", { withFileTypes: true }, (err, files) => {
-//         if (!err) {
-//             const directories = files
-//                 .filter((file) => file.isDirectory())
-//                 .map((file) => file.name);
-//             if (!isRoot()) {
-//                 directories.unshift("..");
-//             }
-//             win.webContents.send("getDirectoryResponse", directories);
-//         }
-//     });
-// }
 
 ipcMain.on("getTemp", (event, path) => {
     sendTemp();
